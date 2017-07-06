@@ -25,7 +25,7 @@ resource "aws_autoscaling_group" "ecs" {
 }
 
 module "ecs_instance_draining_on_scale_in" {
-  source = "github.com/terraform-community-modules/ecs-instance-draining-on-scale-in"
+  source = "github.com/terraform-community-modules/tf_aws_ecs_instance_draining_on_scale_in"
 
   autoscaling_group_name = "${aws_autoscaling_group.ecs.asg_name}"
   hook_heartbeat_timeout = 1800

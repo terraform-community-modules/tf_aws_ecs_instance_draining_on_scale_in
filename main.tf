@@ -117,6 +117,12 @@ resource "aws_lambda_function" "lambda" {
   handler       = "index.lambda_handler"
 
   source_code_hash = "${data.archive_file.index.output_base64sha256}"
+
+  lifecycle {
+    # A workaround when running this code on different machines is to ignore changes, as described here:
+    # https://github.com/hashicorp/terraform/issues/7613#issuecomment-241603087
+    ignore_changes = ["filename"]
+  }
 }
 
 resource "aws_lambda_permission" "sns" {

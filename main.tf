@@ -112,7 +112,7 @@ data "archive_file" "index" {
 resource "aws_lambda_function" "lambda" {
   runtime       = "python2.7"
   filename      = "${path.module}/files/index.zip"
-  function_name = "ecs-instance-draining-on-scale-in"
+  function_name = "${var.autoscaling_group_name}-ecs-instance-draining-on-scale-in"
   role          = "${aws_iam_role.lambda.arn}"
   handler       = "index.lambda_handler"
 

@@ -53,7 +53,7 @@ def lambda_handler(event, context):
   if instance_has_running_tasks(msg['EC2InstanceId']):
       print('Tasks are still running on instance %s; posting msg to SNS topic %s' %
             (msg['EC2InstanceId'], event['Records'][0]['Sns']['TopicArn']))
-      time.sleep(SLEEP_TIME)
+      time.sleep(int(SLEEP_TIME))
       sns_resp = SNS.publish(TopicArn=event['Records'][0]['Sns']['TopicArn'],
                              Message=json.dumps(msg),
                              Subject='Publishing SNS msg to invoke Lambda again.')

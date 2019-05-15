@@ -11,7 +11,10 @@ Further details about [AutoScaling Lifecyle Hooks](http://docs.aws.amazon.com/au
 Module Input Variables
 ----------------------
 
+- `region` - The AWS Region where the resources reside.
 - `autoscaling_group_name` - The Name of the AutoScaling Group used by the ECS Cluster.
+- `cluster_name` - The Name of the ECS Cluster to target
+- `function_sleep_time` - Number of seconds the Lambda function should sleep before checking ECS Instance Task Count again. Defaults to 15 seconds.
 - `hook_heartbeat_timeout` - Amount of time, in seconds, the lifecycle hook should wait before giving up and moving onto the default result. Defaults to 900 (15 mins).
 - `hook_default_result` - Can be one of either ABANDON or CONTINUE. ABANDON stops any remaining actions, such as other lifecycle hooks, while CONTINUE allows any other lifecycle hooks to complete. Default is ABANDON
 - `enabled` - boolean expression. If false, the Lifecycle Hook is removed from the AutoScaling Group. Defaults to `true`.
@@ -27,7 +30,9 @@ resource "aws_autoscaling_group" "ecs" {
 module "ecs_instance_draining_on_scale_in" {
   source = "github.com/terraform-community-modules/tf_aws_ecs_instance_draining_on_scale_in"
 
+  region = "eu-west-1"
   autoscaling_group_name = "${aws_autoscaling_group.ecs.asg_name}"
+  cluster-name = "my-cluster"
   hook_heartbeat_timeout = 1800
   hook_default_result    = "ABANDON"
 }

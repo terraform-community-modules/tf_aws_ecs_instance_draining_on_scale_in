@@ -13,7 +13,7 @@ variable "function_sleep_time" {
 }
 
 variable "lambda_enabled" {
-  default = true
+  default = 1
 }
 
 variable "hook_heartbeat_timeout" {
@@ -23,4 +23,3 @@ variable "hook_heartbeat_timeout" {
 variable "hook_default_result" {
   default = "ABANDON"
 }
-

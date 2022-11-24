@@ -112,7 +112,7 @@ data "archive_file" "index" {
 }
 
 resource "aws_lambda_function" "lambda" {
-  runtime  = "python3.6"
+  runtime  = "python3.9"
   filename = "${path.module}/files/index.zip"
   function_name = substr(
     var.autoscaling_group_name,
